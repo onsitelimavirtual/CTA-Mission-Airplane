@@ -1,0 +1,10 @@
+# CTA Mission Airplane V3.0 — Blueprint para demonstração no Render.
+# Não recomendado para produção pública sem segurança/autenticação adicionais.
+services:
+  - type: web
+    name: cta-mission-airplane
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node server.js
+    healthCheckPath: /api/health

@@ -1,0 +1,6 @@
+CTA Mission Airplane V3.8 — QA final, 12/10/2026
+Testes unitarios e de integracao: 23 aprovados, 0 reprovados
+JavaScript: node --check flight-core.js, math-core.js, atc-core.js, game.js, server.js — aprovados
+Servidor HTTP (ambiente local): 36/36 recursos responderam HTTP 200, incluindo /api/health e imagens
+Chromium gráfico: tentativa bloqueada pelo ambiente (ERR_BLOCKED_BY_ADMINISTRATOR). Não afirmar validação visual nesta rodada.
+Correções de entrega: teste legado referindo Standalone V3.7 mudou para V3.8; package.json versão 3.8.0; documentação do Render atualizada para pasta raiz e branch de publicação.

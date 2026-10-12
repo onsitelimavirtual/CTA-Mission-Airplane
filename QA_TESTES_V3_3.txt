@@ -1,0 +1,100 @@
+TAP version 13
+# Subtest: 6 destinos e 3 pontos por missão
+ok 1 - 6 destinos e 3 pontos por missão
+  ---
+  duration_ms: 1.020332
+  type: 'test'
+  ...
+# Subtest: Limpeza de entradas e normalização de rumo
+ok 2 - Limpeza de entradas e normalização de rumo
+  ---
+  duration_ms: 0.264302
+  type: 'test'
+  ...
+# Subtest: Checagem de colisão e chegada
+ok 3 - Checagem de colisão e chegada
+  ---
+  duration_ms: 0.197242
+  type: 'test'
+  ...
+# Subtest: Bloqueio de estados inválidos
+ok 4 - Bloqueio de estados inválidos
+  ---
+  duration_ms: 0.641431
+  type: 'test'
+  ...
+# Subtest: Servidor HTTP: criação, limite cinco, permissões, atualização e saída
+ok 5 - Servidor HTTP: criação, limite cinco, permissões, atualização e saída
+  ---
+  duration_ms: 198.900393
+  type: 'test'
+  ...
+# Subtest: CTA utiliza seis destinos próprios, avião CTA e cartografia contextual
+ok 6 - CTA utiliza seis destinos próprios, avião CTA e cartografia contextual
+  ---
+  duration_ms: 0.70156
+  type: 'test'
+  ...
+# Subtest: Cronômetro, meteorologia e regra de vitória limpa
+ok 7 - Cronômetro, meteorologia e regra de vitória limpa
+  ---
+  duration_ms: 1.230745
+  type: 'test'
+  ...
+# Subtest: Servidor valida chegada em ordem e registra ranking sem incidentes
+ok 8 - Servidor valida chegada em ordem e registra ranking sem incidentes
+  ---
+  duration_ms: 3267.644778
+  type: 'test'
+  ...
+# Subtest: Integridade dos seis cenários, avião e controles HTML
+ok 9 - Integridade dos seis cenários, avião e controles HTML
+  ---
+  duration_ms: 1.251805
+  type: 'test'
+  ...
+# Subtest: Reiniciar missão online renova rodada e mantém autorização do anfitrião
+ok 10 - Reiniciar missão online renova rodada e mantém autorização do anfitrião
+  ---
+  duration_ms: 8.632987
+  type: 'test'
+  ...
+# Subtest: Movimento suavizado e visão terrestre local disponíveis
+ok 11 - Movimento suavizado e visão terrestre local disponíveis
+  ---
+  duration_ms: 0.365221
+  type: 'test'
+  ...
+# Subtest: Câmera com zoom e mapa próprio, passeio terrestre com quatro comandos
+ok 12 - Câmera com zoom e mapa próprio, passeio terrestre com quatro comandos
+  ---
+  duration_ms: 0.60736
+  type: 'test'
+  ...
+# Subtest: V3.3: todas as quatro setas do teclado têm ação e controles móveis são visíveis
+ok 13 - V3.3: todas as quatro setas do teclado têm ação e controles móveis são visíveis
+  ---
+  duration_ms: 0.422166
+  type: 'test'
+  ...
+1..13
+# tests 13
+# suites 0
+# pass 13
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3547.560993
+
+QA EM CHROMIUM HEADLESS (1366x768 e 390x844):
+- Iniciar partida solo com aceite: OK.
+- Seta direita/esquerda altera rumo e exibe reação do avião: OK.
+- Seta cima/baixo altera altitude, sem inverter direção: OK.
+- Toque no botão Acelerar incrementa velocidade imediatamente: OK.
+- Zoom +/- altera indicador e transformação renderizada do avião: OK.
+- Câmera e mapa local em aparelho móvel simulado: OK.
+- Controles de zoom integrados ao mapa (132%) redesenham a imagem: OK.
+- Zero exceções JS observadas no teste funcional.
+- GET /api/health, GET / e GET /logo.png: retornam HTTP 200 em servidor Node local.
+Limitado a automação de navegador; NÃO homologa desempenho, acessibilidade, dispositivos físicos, infraestrutura do Render ou segurança de produção.

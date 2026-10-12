@@ -1,0 +1,70 @@
+TAP version 13
+# Subtest: 6 destinos e 3 pontos por missão
+ok 1 - 6 destinos e 3 pontos por missão
+  ---
+  duration_ms: 0.805476
+  type: 'test'
+  ...
+# Subtest: Limpeza de entradas e normalização de rumo
+ok 2 - Limpeza de entradas e normalização de rumo
+  ---
+  duration_ms: 0.233973
+  type: 'test'
+  ...
+# Subtest: Checagem de colisão e chegada
+ok 3 - Checagem de colisão e chegada
+  ---
+  duration_ms: 0.170637
+  type: 'test'
+  ...
+# Subtest: Bloqueio de estados inválidos
+ok 4 - Bloqueio de estados inválidos
+  ---
+  duration_ms: 0.174824
+  type: 'test'
+  ...
+# Subtest: Servidor HTTP: criação, limite cinco, permissões, atualização e saída
+ok 5 - Servidor HTTP: criação, limite cinco, permissões, atualização e saída
+  ---
+  duration_ms: 192.085499
+  type: 'test'
+  ...
+# Subtest: CTA utiliza seis destinos próprios, avião CTA e cartografia contextual
+ok 6 - CTA utiliza seis destinos próprios, avião CTA e cartografia contextual
+  ---
+  duration_ms: 0.679807
+  type: 'test'
+  ...
+# Subtest: Cronômetro, meteorologia e regra de vitória limpa
+ok 7 - Cronômetro, meteorologia e regra de vitória limpa
+  ---
+  duration_ms: 0.770284
+  type: 'test'
+  ...
+# Subtest: Servidor valida chegada em ordem e registra ranking sem incidentes
+ok 8 - Servidor valida chegada em ordem e registra ranking sem incidentes
+  ---
+  duration_ms: 3270.371995
+  type: 'test'
+  ...
+# Subtest: Integridade dos seis cenários, avião e controles HTML
+ok 9 - Integridade dos seis cenários, avião e controles HTML
+  ---
+  duration_ms: 1.11873
+  type: 'test'
+  ...
+# Subtest: Reiniciar missão online renova rodada e mantém autorização do anfitrião
+ok 10 - Reiniciar missão online renova rodada e mantém autorização do anfitrião
+  ---
+  duration_ms: 7.313386
+  type: 'test'
+  ...
+1..10
+# tests 10
+# suites 0
+# pass 10
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3523.424295

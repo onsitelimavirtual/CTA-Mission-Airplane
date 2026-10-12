@@ -1,0 +1,2 @@
+Os testes foram atualizados após retirar o passeio terrestre vetorial.
+O resultado atual é registrado em QA_V3_7_FINAL.txt.

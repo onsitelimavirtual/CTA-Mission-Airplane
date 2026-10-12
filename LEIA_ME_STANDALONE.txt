@@ -1,0 +1,38 @@
+CTA MISSION AIRPLANE — V3.0 STANDALONE
+Simulador de Controle de Tráfego Aéreo
+Copyright © 2026 Nailson Rodrigues de Lima.
+
+COMO ABRIR
+1. Extraia o arquivo ZIP (ou baixe diretamente o HTML).
+2. Abra CTA_Mission_Airplane_Standalone_V3_0.html em um navegador atualizado.
+3. Escolha uma das seis missões, informe um apelido, leia e aceite os documentos.
+4. Clique INICIAR MISSÃO; use os controles na tela ou W/S, A/D e setas do teclado.
+5. Complete os três pontos de interesse evitando incidentes e tentando obter o menor tempo.
+
+FUNCIONALIDADES LOCAIS
+- Seis destinos: Rio Quente, Fernando de Noronha, Rio de Janeiro, Miami, Fortaleza e Brasília.
+- Aeronave e imagens ilustradas incorporadas ao HTML, sem arquivos auxiliares.
+- Piloto automático recreativo, controles por toque/teclado, câmeras, radar e instrumentos simulados.
+- Névoa, chuva, turbulência e baixa visibilidade simuladas.
+- Pontos turísticos, cronômetro, segurança/incident​es e melhores tempos locais.
+- Termos de Uso, Política de Privacidade e minuta do contrato digital dentro do HTML.
+
+LIMITAÇÕES
+- O modo de TREINO LOCAL funciona sem internet e sem servidor externo.
+- O mapa geográfico real do OpenStreetMap exige internet. Em modo offline, aparece ilustração
+  do destino, devidamente identificada. O cenário do voo é artístico e não é reconstrução exata.
+- O modo MULTIJOGADOR de até 5 pessoas exige o servidor Node.js do pacote completo.
+  Ao abrir em file://, o botão online é desativado para evitar confusão.
+- O aceite eletrônico local não autentica identidade nem equivale a assinatura avançada.
+- Não é ferramenta certificada para navegação aeronáutica ou controle de tráfego real.
+- Para vender/publicar, ainda são necessários testes em aparelhos reais e revisão jurídica,
+  licenças de terceiros, acessibilidade e segurança de produção.
+
+TESTES DESTA ENTREGA
+- 10 testes automatizados do pacote V3.0 passaram (Node.js).
+- Teste de navegador Chromium com HTML autocontido: 6 cartões de destino, imagens, canvas,
+  abertura da partida solo, carregamento de avião, clima inicial e sem erro JS (desktop/móvel).
+- Teste da seleção de Brasília e câmera Mapa sem internet: fallback local exibido sem erro JS.
+- Abertura real por toque em aparelhos físicos ainda não homologada.
+
+Arquivos entregues: HTML autossuficiente e este manual.

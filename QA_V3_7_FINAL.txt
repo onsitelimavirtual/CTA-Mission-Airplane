@@ -1,0 +1,124 @@
+TAP version 13
+# Subtest: 6 destinos e 3 pontos por missão
+ok 1 - 6 destinos e 3 pontos por missão
+  ---
+  duration_ms: 0.954446
+  type: 'test'
+  ...
+# Subtest: Limpeza de entradas e normalização de rumo
+ok 2 - Limpeza de entradas e normalização de rumo
+  ---
+  duration_ms: 0.239255
+  type: 'test'
+  ...
+# Subtest: Checagem de colisão e chegada
+ok 3 - Checagem de colisão e chegada
+  ---
+  duration_ms: 0.157664
+  type: 'test'
+  ...
+# Subtest: Bloqueio de estados inválidos
+ok 4 - Bloqueio de estados inválidos
+  ---
+  duration_ms: 0.281638
+  type: 'test'
+  ...
+# Subtest: Servidor HTTP: criação, limite cinco, permissões, atualização e saída
+ok 5 - Servidor HTTP: criação, limite cinco, permissões, atualização e saída
+  ---
+  duration_ms: 190.666531
+  type: 'test'
+  ...
+# Subtest: CTA utiliza seis destinos próprios, avião CTA e cartografia contextual
+ok 6 - CTA utiliza seis destinos próprios, avião CTA e cartografia contextual
+  ---
+  duration_ms: 0.821068
+  type: 'test'
+  ...
+# Subtest: Cronômetro, meteorologia e regra de vitória limpa
+ok 7 - Cronômetro, meteorologia e regra de vitória limpa
+  ---
+  duration_ms: 1.075075
+  type: 'test'
+  ...
+# Subtest: Servidor valida chegada em ordem e registra ranking sem incidentes
+ok 8 - Servidor valida chegada em ordem e registra ranking sem incidentes
+  ---
+  duration_ms: 3267.729478
+  type: 'test'
+  ...
+# Subtest: Integridade dos seis cenários, avião e controles HTML
+ok 9 - Integridade dos seis cenários, avião e controles HTML
+  ---
+  duration_ms: 1.556148
+  type: 'test'
+  ...
+# Subtest: Reiniciar missão online renova rodada e mantém autorização do anfitrião
+ok 10 - Reiniciar missão online renova rodada e mantém autorização do anfitrião
+  ---
+  duration_ms: 7.371626
+  type: 'test'
+  ...
+# Subtest: Movimento suavizado e nova exploração fotográfica disponíveis
+ok 11 - Movimento suavizado e nova exploração fotográfica disponíveis
+  ---
+  duration_ms: 0.498339
+  type: 'test'
+  ...
+# Subtest: Câmera com zoom, mapa próprio e navegação fotográfica por destino
+ok 12 - Câmera com zoom, mapa próprio e navegação fotográfica por destino
+  ---
+  duration_ms: 0.63976
+  type: 'test'
+  ...
+# Subtest: V3.3: todas as quatro setas do teclado têm ação e controles móveis são visíveis
+ok 13 - V3.3: todas as quatro setas do teclado têm ação e controles móveis são visíveis
+  ---
+  duration_ms: 0.57958
+  type: 'test'
+  ...
+# Subtest: V3.4: câmeras visíveis no celular, som e aviso de proximidade
+ok 14 - V3.4: câmeras visíveis no celular, som e aviso de proximidade
+  ---
+  duration_ms: 1.06509
+  type: 'test'
+  ...
+# Subtest: V3.5: panorama reverso com rumbo contínuo, nuvens e inclinação consistente
+ok 15 - V3.5: panorama reverso com rumbo contínuo, nuvens e inclinação consistente
+  ---
+  duration_ms: 0.57945
+  type: 'test'
+  ...
+# Subtest: V3.6: seno, cosseno e tangente explicados com cálculos corretos
+ok 16 - V3.6: seno, cosseno e tangente explicados com cálculos corretos
+  ---
+  duration_ms: 0.589174
+  type: 'test'
+  ...
+# Subtest: V3.6: painel ilustrado tem três lições, controles, acessibilidade e servidor entrega math-core
+ok 17 - V3.6: painel ilustrado tem três lições, controles, acessibilidade e servidor entrega math-core
+  ---
+  duration_ms: 4.787072
+  type: 'test'
+  ...
+# Subtest: V3.7: exploração mostra imagens artísticas para todos os seis destinos e remove a rua vetorial
+ok 18 - V3.7: exploração mostra imagens artísticas para todos os seis destinos e remove a rua vetorial
+  ---
+  duration_ms: 0.750012
+  type: 'test'
+  ...
+# Subtest: V3.7: Standalone embute as imagens da galeria, incluindo miniaturas
+ok 19 - V3.7: Standalone embute as imagens da galeria, incluindo miniaturas
+  ---
+  duration_ms: 24.322963
+  type: 'test'
+  ...
+1..19
+# tests 19
+# suites 0
+# pass 19
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3558.843051

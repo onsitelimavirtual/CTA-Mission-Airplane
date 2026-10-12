@@ -1,0 +1,13 @@
+CTA Mission Airplane V3.5 — QA do panorama dinâmico
+Copyright © 2026 Nailson Rodrigues de Lima
+
+Testes automatizados de lógica/servidor: 15/15 aprovados (node --test).
+Sintaxe: node --check game.js aprovado.
+Testes em navegador Chromium, versões standalone, dimensões de desktop (1280x800) e celular (390x844):
+- tecla ArrowRight: panorama de referência deslocado para a esquerda; desktop -179.8 px, celular -106.8 px.
+- tecla ArrowLeft: panorama de referência deslocado para a direita; desktop +301.7 px, celular +151.7 px a partir da posição após virar à direita.
+- tecla ArrowUp: altitude aumentou; desktop 287 m -> 309 m, celular 287 m -> 306 m.
+- cinco câmeras e botões de som e radar visíveis, alternância de modos realizada.
+- Nenhum erro JavaScript nos cenários testados.
+
+Limitações: QA visual automatizado por viewport não equivale a homologação em Android/iOS físicos nem a reconstrução geográfica real. As imagens são panoramas ilustrados repetidos por espelhamento.

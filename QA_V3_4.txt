@@ -1,0 +1,6 @@
+CTA Mission Airplane V3.4 — QA de integração
+- 14 testes automatizados de Node.js aprovados.
+- `node --check game.js` aprovado.
+- Chromium headless em desktop 1366×768 e mobile 390×844: abertura e inicio do jogo; seleção funcional das 5 câmeras; presença da faixa de câmeras no celular; câmera de cabine oculta o sprite externo; vista superior exibe a aeronave; mapa interno visível na câmera 5; botão Som ligado / Mudo altera seu estado; painel de tráfego visível; sem erros JavaScript nos cenários exercitados.
+- Web Audio programático por API nativa do navegador. A qualidade e audibilidade do motor ainda exigem inspeção em dispositivos reais (Android, Windows, fones e modos silenciosos).
+- Simulação aeronáutica e radar fictícios, sem certificação.

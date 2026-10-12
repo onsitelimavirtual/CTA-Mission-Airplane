@@ -1,0 +1,1 @@
+Node 22+ — node --test tests/quality.test.js: 11 testes passaram. node --check game.js: passou. Captura visual em navegador físico e controle remoto não realizados.

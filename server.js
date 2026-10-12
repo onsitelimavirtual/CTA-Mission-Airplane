@@ -8,7 +8,7 @@ const ROOT=__dirname;
 const MAX_PLAYERS=5,MAX_BODY=2048,TTL=40_000;
 const rooms=new Map();
 const allowed={'/':'index.html','/index.html':'index.html','/style.css':'style.css','/flight-core.js':'flight-core.js','/game.js':'game.js','/math-core.js':'math-core.js','/logo.png':'logo.png','/aviao-cta-pro.svg':'aviao-cta-pro.svg'};
-for(const m of Core.missions){allowed['/'+m.id+'.webp']=''+m.id+'.webp';allowed['/cenario-'+m.id+'.webp']='cenario-'+m.id+'.webp'}allowed['/arte-conceito-cta.webp']='arte-conceito-cta.webp';allowed['/arte-panoramica-rio.webp']='arte-panoramica-rio.webp';
+for(const m of Core.missions){allowed['/'+m.id+'.webp']=''+m.id+'.webp';allowed['/cenario-'+m.id+'.webp']='cenario-'+m.id+'.webp'}for(const m of Core.missions){allowed['/explorar-'+m.id+'.webp']='explorar-'+m.id+'.webp';allowed['/explorar-'+m.id+'-detalhe.webp']='explorar-'+m.id+'-detalhe.webp'}allowed['/arte-conceito-cta.webp']='arte-conceito-cta.webp';allowed['/arte-panoramica-rio.webp']='arte-panoramica-rio.webp';
 const mimes={'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'text/javascript; charset=utf-8','.png':'image/png','.svg':'image/svg+xml','.webp':'image/webp'};
 function send(res,status,data){if(res.writableEnded)return;res.writeHead(status,{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store'});res.end(JSON.stringify(data));}
 function parse(req){return new Promise((resolve,reject)=>{let body='',size=0;req.on('data',b=>{size+=b.length;if(size>MAX_BODY){reject(new Error('Corpo muito grande'));req.destroy();return;}body+=b;});req.on('end',()=>{try{resolve(JSON.parse(body||'{}'))}catch{reject(new Error('JSON inválido'))}});req.on('error',reject);});}

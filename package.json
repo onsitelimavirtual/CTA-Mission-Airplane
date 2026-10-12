@@ -1,0 +1,14 @@
+{
+  "name": "cta-mission-airplane",
+  "version": "3.6.0",
+  "private": true,
+  "description": "CTA Mission Airplane: demonstracao multiplayer com ate cinco pilotos por sala",
+  "main": "server.js",
+  "engines": {
+    "node": ">=22.0.0 <23.0.0"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test tests/quality.test.js"
+  }
+}

@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#07172c"><meta name="description" content="CTA Mission Airplane: missões panorâmicas, radar e jogo competitivo de até cinco pilotos.">
+  <title>CTA Mission Airplane — Simulador de Controle de Tráfego Aéreo</title><link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <header class="appbar">
+    <div class="brand"><div class="brand-ico">✈</div><div><strong>CTA MISSION AIRPLANE</strong><span>Simulador de Controle de Tráfego Aéreo</span></div></div>
+    <div class="app-actions"><span id="networkPill" class="status-pill">● Modo local</span><button type="button" id="mathHeaderBtn" class="btn math-entry" aria-label="Abrir Matemática do Voo">📐 <span>Matemática do Voo</span></button><button id="helpBtn" class="icon-btn" aria-label="Ajuda e controles">?</button><button id="menuBtn" class="btn minor">☰ Missões</button></div>
+  </header>
+  <main id="flightArea" class="flight-area" aria-label="Área de voo 3D">
+    <div id="sceneBackdrop" aria-hidden="true"></div><canvas id="world" aria-label="Cenário tridimensional estilizado da missão"></canvas><div id="planeVisual" class="plane-visual" aria-hidden="true"><img src="aviao-cta-pro.svg" alt=""></div><div class="scene-info">✈ CTA MISSION AIRPLANE <span>· Cenário panorâmico dinâmico • mapa offline</span></div>
+    <div id="geoMapOverlay" class="geo-map-overlay hidden" aria-label="Mapa esquemático local do destino"><div class="map-header"><strong id="mapDestination">MAPA LOCAL</strong><div class="map-zoom-actions"><button type="button" class="mini-btn" id="mapZoomOutBtn" aria-label="Afastar mapa">−</button><span id="mapZoomStatus">100%</span><button type="button" class="mini-btn" id="mapZoomInBtn" aria-label="Aproximar mapa">+</button></div><button type="button" class="mini-btn" id="mapClose">Voltar ao voo</button></div><canvas id="localMapCanvas" width="960" height="520" role="img" aria-label="Mapa esquemático local e fictício da rota e dos três marcos, com posição da aeronave"></canvas><div class="route-geopoints" id="routeGeopoints" aria-label="Coordenadas dos pontos turísticos"></div><div class="map-footer">Mapa interno esquemático, não é cartografia real • Link opcional para © OpenStreetMap contributors (requer internet) • <a id="osmLink" href="https://www.openstreetmap.org/" rel="noopener noreferrer" target="_blank">Ver em mapa aberto</a></div></div><div class="vignette"></div>
+    <nav class="flight-destinations" id="flightDestinations" aria-label="Seis destinos do jogo"></nav>
+    <div class="flight-hud">
+      <div class="hud-chip"><small>VELOCIDADE</small><strong id="speedVal">145 <em>kt</em></strong><span id="throttleHint" class="hud-caption">VELOCIDADE DE CRUZEIRO</span></div>
+      <div class="hud-chip"><small>ALTITUDE</small><strong id="altVal">280 <em>m</em></strong></div>
+      <div class="hud-chip"><small>RUMO</small><strong id="hdgVal">045 <em>°</em></strong></div>
+      <div class="hud-chip hide-narrow"><small>SEGURANÇA</small><strong id="safetyVal">SEGURO</strong></div>
+    </div>
+    <div id="cameraMode" class="camera-mode-label" aria-live="polite">📷 1/5 • Perseguição externa</div><div class="camera-toolbar" role="group" aria-label="Câmeras do simulador"><button type="button" class="camera-option selected" data-camera="0">✈ Externa</button><button type="button" class="camera-option" data-camera="1">◉ Cabine</button><button type="button" class="camera-option" data-camera="2">◧ Asa</button><button type="button" class="camera-option" data-camera="3">⌖ Superior</button><button type="button" class="camera-option" data-camera="4">▦ Mapa local</button></div><div class="weather-status" id="weatherStatus"><span id="weatherIcon">☀</span><div><strong id="weatherName">Céu aberto</strong><small id="visibilityVal">Visibilidade 100%</small></div></div>
+    <div class="race-clock" aria-live="off"><strong id="clockVal">00:00</strong><span id="incidentVal">✓ 0 incidentes</span><small id="raceHint">Vitória: rota limpa + melhor tempo</small></div>
+    <div class="flight-center"><div id="alertBanner" class="alert" role="status" aria-live="polite">Rota pronta para exploração</div></div>
+    <div class="radar-panel"><div class="radar-title"><b>◉ RADAR CTA</b><span id="radarCount">1 / 5</span></div><canvas id="radar" width="300" height="230" aria-label="Radar com localização dos aviões"></canvas><div class="radar-leg"><span>● Você</span><span>● Tráfego</span><span>◇ Objetivo</span></div></div>
+    <div class="mission-panel"><div class="mission-title"><span>MISSÃO EM CURSO</span><span class="mission-count" id="missionProgress">0/3</span></div><h2 id="destName">Rio Quente — GO</h2><p id="objectiveText">Sobrevoe os destinos com segurança.</p><div class="progress-track"><i id="progressFill"></i></div><div class="scoreline"><span>⭐ <b id="scoreVal">0</b> pontos</span><span id="distVal">-- m do próximo ponto</span></div></div>
+    <div class="raceboard" id="raceboard" aria-label="Classificação da missão"><strong>🏆 CLASSIFICAÇÃO</strong><div id="raceRows">Aguardando resultados...</div></div>
+    <div class="weather-fx" id="weatherFx" aria-hidden="true"></div>
+    <div class="control-dock" aria-label="Comandos de pilotagem">
+      <div class="ctrl-group named-group"><span class="ctrl-caption">DIREÇÃO</span><div><button class="touch-control" data-hold="left" aria-label="Virar à esquerda" title="← / A">⬅</button><button class="touch-control" data-hold="right" aria-label="Virar à direita" title="→ / D">➡</button></div></div>
+      <div class="ctrl-group named-group"><span class="ctrl-caption">ALTITUDE</span><div><button class="touch-control" data-hold="up" aria-label="Subir" title="↑">▲</button><button class="touch-control" data-hold="down" aria-label="Descer" title="↓">▼</button></div></div>
+      <div class="ctrl-group named-group speed-group"><span class="ctrl-caption">VELOCIDADE</span><div><button class="touch-control accelerate" id="accelerateBtn" data-hold="faster" aria-label="Acelerar voo" title="W">🚀 Acelerar</button><button class="touch-control slow" data-hold="slower" aria-label="Reduzir velocidade" title="S">−</button></div></div>
+      <div class="secondary-controls"><button class="mini-btn" id="autoBtn" aria-pressed="false">✧ Piloto auto</button><button class="mini-btn" id="cameraBtn" title="Alternar câmeras">📷 1/5</button><button class="mini-btn audio-btn" id="soundBtn" aria-label="Silenciar som do avião" aria-pressed="true">🔊 Som ligado</button><button class="mini-btn" id="zoomOutBtn" aria-label="Afastar câmera">− Zoom</button><output class="zoom-status" id="zoomStatus" aria-label="Nível do zoom">100%</output><button class="mini-btn" id="zoomInBtn" aria-label="Aproximar câmera">+ Zoom</button><button class="mini-btn" id="pauseBtn">Ⅱ Pausar</button><button type="button" class="mini-btn math-entry-dock" id="mathDockBtn" aria-label="Abrir Matemática do Voo">📐 Matemática</button></div>
+    </div>
+    <section id="trafficAlert" class="traffic-alert" data-level="clear" aria-live="polite" aria-label="Alerta de aeronaves próximas"><strong id="trafficSummary">Radar monitorando o espaço aéreo</strong><span id="trafficDistance">Nenhuma aeronave identificada</span></section><div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </main>
+  <aside id="side" class="side-panel hidden" aria-label="Painel de missões"><div class="side-head"><h2>Central de missões</h2><button id="closeSide" class="icon-btn" aria-label="Fechar menu">✕</button></div><p>Escolha um dos seis destinos para uma corrida de voo panorâmico sem incidentes.</p><div id="destinationList" class="destination-list"></div><div class="panel-actions"><button id="restartBtn" class="btn minor">↻ Reiniciar missão</button><button id="globeBtn" class="btn minor">▦ Mapa local sem internet</button><button id="homeBtn" class="btn minor">⌂ Tela inicial</button></div></aside>
+  <section id="welcome" class="welcome" aria-labelledby="welcomeTitle"><div class="welcome-inner">
+      <div class="hero"><img src="logo.png" alt="Logomarca CTA Mission Airplane com avião, globo e paisagens turísticas" class="hero-logo"><div class="hero-info"><div class="eyebrow">EDIÇÃO 3.6 • DESAFIOS METEOROLÓGICOS • RANKING</div><h1 id="welcomeTitle">Sua missão começa no céu.</h1><p>Planeje rotas panorâmicas, acompanhe o radar e mantenha distância segura entre as aeronaves. Seis destinos brasileiros e internacionais, três pontos por missão, eventos meteorológicos e disputa por menor tempo sem incidentes para até cinco pilotos online.</p><div class="hero-highlights"><span>✦ Seis cenários turísticos</span><span>✦ Mapa interno sem internet</span><span>✦ Corrida por tempo • até 5 online</span></div><div class="featured-heading">ESCOLHA SUA AVENTURA</div><div id="featuredMissions" class="featured-missions" aria-label="Seis missões disponíveis"></div><div class="concept-gallery"><details><summary>Ver arte-conceito que inspira esta versão</summary><img src="arte-conceito-cta.webp" loading="lazy" alt="Arte-conceito ilustrativa CTA Mission Airplane com paisagens, avião e painéis"/><p>Imagem promocional ilustrativa. Os comandos reais são os botões do aplicativo; condições meteorológicas e instrumentos na arte não são dados ao vivo.</p></details></div></div></div>
+      <div class="start-card"><div class="start-visual" role="img" aria-label="Vista panorâmica ilustrativa de voo sobre o Rio de Janeiro"></div><h2>Preparar decolagem</h2><label for="pilotName">Seu nome de piloto (apelido)</label><input id="pilotName" type="text" maxlength="18" autocomplete="off" placeholder="Ex.: Águia Azul" value="Piloto 1"><label for="destSelect">Destino da missão</label><select id="destSelect"></select><div class="mode-tabs"><button id="soloTab" class="mode-tab selected" aria-pressed="true">☀ Treino local</button><button id="onlineTab" class="mode-tab" aria-pressed="false">◉ Sala online</button></div><div id="onlineControls" class="online-controls hidden"><label for="roomCode">Código da sala — compartilhe com até 4 amigos</label><div class="room-row"><input id="roomCode" maxlength="6" placeholder="Ex.: CTA123" autocomplete="off" autocapitalize="characters"><button id="newRoom" class="btn minor">Gerar</button></div><p id="onlineInfo" class="note">Para jogar online, abra a aplicação pelo servidor incluído no pacote.</p></div><label class="consent"><input type="checkbox" id="acceptTerms"><span>Li e aceito os <button class="link-btn" data-doc="terms">Termos de Uso</button>, a <button class="link-btn" data-doc="privacy">Política de Privacidade</button> e o <button class="link-btn" data-doc="contract">Contrato digital</button>.</span></label><button id="startGame" class="btn primary big">▶ INICIAR MISSÃO</button><button type="button" id="mathWelcomeBtn" class="btn math-welcome-btn">📐 Aprender Matemática do Voo</button><p id="startError" class="error" role="alert"></p><p class="note tiny">Aceite eletrônico local nesta versão; não é assinatura avançada/verificada. Para menores, participação conforme orientação e autorização de responsáveis.</p></div>
+    </div></section>
+
+  <section id="mathPanel" class="math-panel hidden" role="dialog" aria-modal="false" aria-labelledby="mathHeading" aria-hidden="true">
+    <div class="math-head"><div><span class="math-kicker">LABORATÓRIO INTERATIVO · OFFLINE</span><h2 id="mathHeading">📐 Matemática do Voo</h2><p>Descubra a trigonometria que explica o movimento do avião.</p></div><button type="button" class="icon-btn" id="mathClose" aria-label="Fechar Matemática do Voo">✕</button></div>
+    <div class="math-body">
+      <div class="math-tabs" role="group" aria-label="Escolha uma lição">
+        <button type="button" class="math-tab active" data-math-topic="heading" aria-pressed="true">🧭 Direção</button>
+        <button type="button" class="math-tab" data-math-topic="slope" aria-pressed="false">📈 Subida</button>
+        <button type="button" class="math-tab" data-math-topic="turn" aria-pressed="false">✈ Curvas</button>
+      </div>
+      <section class="math-lesson" data-math-lesson="heading" aria-label="Seno e cosseno na navegação">
+        <h3>1. Seno e cosseno: para onde vou?</h3>
+        <p>O <b>rumo</b> é o ângulo medido a partir do <b>norte</b>, no sentido horário. O cosseno mostra a parte do movimento para o norte; o seno, para o leste.</p>
+        <svg id="mathCompass" class="math-graphic" viewBox="0 0 320 245" role="img" aria-label="Bússola com vetor da velocidade e componentes para norte e leste">
+          <defs><marker id="mathArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#ffcf73"/></marker></defs>
+          <circle cx="160" cy="119" r="90" fill="#102d47" stroke="#5b91af" stroke-width="2"/><circle cx="160" cy="119" r="55" fill="none" stroke="#356483" stroke-dasharray="5 5"/>
+          <path d="M160 29 V209 M70 119 H250" stroke="#648fae" stroke-width="1" stroke-dasharray="5 4"/>
+          <text x="160" y="20" text-anchor="middle" class="math-svg-label">N</text><text x="160" y="234" text-anchor="middle" class="math-svg-label">S</text><text x="265" y="125" text-anchor="middle" class="math-svg-label">L</text><text x="55" y="125" text-anchor="middle" class="math-svg-label">O</text>
+          <line id="mathEastLeg" x1="160" y1="119" x2="160" y2="119" stroke="#59e5d1" stroke-width="4"/><line id="mathNorthLeg" x1="160" y1="119" x2="160" y2="119" stroke="#85bfff" stroke-width="4"/><line id="mathHeadingArrow" x1="160" y1="119" x2="214" y2="65" stroke="#ffcf73" stroke-width="5" marker-end="url(#mathArrow)"/>
+          <circle cx="160" cy="119" r="5" fill="#fff"/><text id="mathHeadingLabel" x="160" y="215" text-anchor="middle" class="math-svg-data">Rumo 45°</text>
+        </svg>
+        <div class="math-formulas"><div><strong>Sen(θ)</strong><code>Velocidade leste = V × sen(θ)</code></div><div><strong>Cos(θ)</strong><code>Velocidade norte = V × cos(θ)</code></div></div>
+        <div class="math-live"><small>NO SEU AVIÃO AGORA</small><strong id="mathHeadingNow">Rumo 45° · 138 kt</strong><span id="mathVectorValues">Leste: 98 kt · Norte: 98 kt</span></div>
+        <p class="math-explain">Exemplo: a 90° o avião aponta para leste: sen(90°) = 1 e cos(90°) = 0. Valores negativos representam oeste ou sul.</p>
+      </section>
+      <section class="math-lesson hidden" data-math-lesson="slope" aria-label="Tangente na subida e na descida">
+        <h3>2. Tangente: quanto subo ou desço?</h3>
+        <p>A <b>tangente</b> relaciona a mudança de altura à distância percorrida <b>horizontalmente</b>. É uma maneira simples de entender a inclinação de uma trajetória.</p>
+        <svg class="math-graphic" viewBox="0 0 320 245" role="img" aria-label="Triângulo retângulo que mostra distância horizontal e variação de altura">
+          <path d="M38 204 H291" stroke="#72ce98" stroke-width="4"/><line x1="290" y1="204" x2="290" y2="75" stroke="#70c9f9" stroke-width="3" stroke-dasharray="5 5"/>
+          <line id="mathSlopePath" x1="38" y1="204" x2="290" y2="150" stroke="#ffcf73" stroke-width="5"/>
+          <path d="M277 204 V191 H290" stroke="#d8e8fa" fill="none" stroke-width="2"/>
+          <text x="158" y="227" class="math-svg-label" text-anchor="middle">1.000 m (horizontal)</text><text x="295" y="140" class="math-svg-label" text-anchor="end" id="mathSlopeFigureLabel">Δh = 52 m</text>
+          <text x="70" y="195" fill="#ffcf73" font-size="12">θ</text><text x="150" y="32" text-anchor="middle" class="math-svg-data">TRAJETÓRIA DE VOO</text>
+          <g id="mathSlopePlane" transform="translate(290 150)"><path d="M-26 0 H26 L12 -5 L4 -5 L0 -23 H-7 L-10 -5 L-22 -5Z" fill="#e6f8ff" stroke="#6486a6" stroke-width="1"/></g>
+        </svg>
+        <div class="math-formulas"><div><strong>Tan(θ)</strong><code>Variação de altura = 1.000 × tan(θ)</code></div></div>
+        <label class="math-slider-label" for="mathAngle">Ângulo de referência <output id="mathAngleValue">3°</output></label><input type="range" min="1" max="12" step="1" value="3" id="mathAngle" class="math-range"/>
+        <div class="math-live"><small>EXEMPLO DE TRAJETÓRIA</small><strong id="mathSlopeHeight">3° → 52 m de altura em 1.000 m</strong><span id="mathVerticalNow">Seu avião: altitude 280 m</span></div>
+        <p class="math-explain">O triângulo é ampliado para facilitar a leitura. O exemplo usa uma trajetória idealizada e não substitui procedimentos reais de aproximação.</p>
+      </section>
+      <section class="math-lesson hidden" data-math-lesson="turn" aria-label="Tangente e inclinação em curvas">
+        <h3>3. Curvas: por que o avião inclina?</h3>
+        <p>Numa curva coordenada idealizada, o avião inclina as asas. A <b>tangente do ângulo de inclinação</b> ajuda a relacionar a velocidade ao raio da curva.</p>
+        <svg class="math-graphic" viewBox="0 0 320 245" role="img" aria-label="Vista traseira de um avião inclinando as asas durante uma curva">
+          <path d="M20 174 H300" stroke="#6b9fbd" stroke-width="3" stroke-dasharray="7 7"/><circle cx="160" cy="155" r="84" fill="none" stroke="#3f6b83" stroke-dasharray="4 5"/>
+          <g id="mathBankPlane" transform="rotate(25 160 154)"><path d="M49 144 L151 148 L154 108 L166 108 L169 148 L270 144 L283 158 L172 165 L173 185 L147 185 L148 165 L37 158Z" fill="#d6f2ff" stroke="#6fb6d9" stroke-width="2"/><rect x="152" y="144" width="16" height="32" rx="7" fill="#265c86"/></g>
+          <path d="M160 155 V56" stroke="#9bc1da" stroke-dasharray="6 4" stroke-width="2"/>
+          <text x="160" y="25" text-anchor="middle" class="math-svg-data">INCLINAÇÃO DAS ASAS</text><text id="mathBankFigureLabel" x="160" y="228" text-anchor="middle" class="math-svg-label">25°</text>
+        </svg>
+        <div class="math-formulas"><div><strong>Raio da curva</strong><code>R = v² ÷ (g × tan(φ))</code></div></div>
+        <label class="math-slider-label" for="mathBankAngle">Inclinação do exemplo <output id="mathBankValue">25°</output></label><input type="range" min="5" max="45" value="25" step="5" id="mathBankAngle" class="math-range"/>
+        <div class="math-live"><small>EXEMPLO IDEALIZADO</small><strong id="mathTurnRadius">Raio estimado: —</strong><span id="mathBankNow">Seu avião: 0° de inclinação visual</span></div>
+        <p class="math-explain">Quanto mais inclinado, menor tende a ser o raio na mesma velocidade. O movimento do jogo é simplificado, portanto o raio teórico não controla a simulação.</p>
+      </section>
+      <section class="math-challenge" aria-label="Desafio educativo"><div class="math-challenge-title"><span>🎯 TESTE SEU RACIOCÍNIO</span><small>1 pergunta por lição</small></div><p id="mathQuestion">Responda ao desafio!</p><div id="mathAnswers" class="math-answers"></div><p id="mathFeedback" role="status" aria-live="polite" class="math-feedback">Escolha uma resposta.</p></section>
+      <p class="math-disclaimer">Conteúdo didático ilustrativo. Velocidade em nós (kt), altura em metros (m); não utilizar para navegação, pouso ou pilotagem reais.</p>
+    </div>
+  </section>
+  <div id="dialogLayer" class="dialog-layer hidden" role="presentation"><section class="dialog" role="dialog" aria-modal="true" aria-labelledby="dialogTitle"><header><h2 id="dialogTitle">Informações</h2><button id="closeDialog" class="icon-btn">✕</button></header><div id="dialogContent" class="dialog-content"></div><footer><button id="dialogOk" class="btn primary">Entendi</button></footer></section></div>
+  <footer class="footer"><span>© 2026 Nailson Rodrigues de Lima • CTA Mission Airplane V3.6</span><div><button class="link-btn" data-doc="terms">Termos</button><button class="link-btn" data-doc="privacy">Privacidade</button><button class="link-btn" data-doc="contract">Contrato</button><button id="qaBtn" class="link-btn">Diagnóstico</button></div></footer>
+</div><script src="flight-core.js" defer></script><script src="math-core.js" defer></script><script src="game.js" defer></script></body></html>

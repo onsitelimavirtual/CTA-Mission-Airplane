@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" role="img" aria-label="Aeronave original CTA Mission Airplane vista superior">
+<defs>
+ <linearGradient id="metal" x1="0" y1="0" x2="1" y2=".7"><stop stop-color="#b6ccd9"/><stop offset=".15" stop-color="#ffffff"/><stop offset=".49" stop-color="#e9f7ff"/><stop offset=".8" stop-color="#acc4d4"/><stop offset="1" stop-color="#4b7291"/></linearGradient>
+ <linearGradient id="wing" x1="0" y1=".2" x2=".9" y2="1"><stop stop-color="#fff"/><stop offset=".35" stop-color="#deeef5"/><stop offset=".55" stop-color="#8faec1"/><stop offset=".72" stop-color="#d4e6f0"/><stop offset="1" stop-color="#36536b"/></linearGradient>
+ <linearGradient id="engine" x1="0" y1="0" x2=".9" y2="1"><stop stop-color="#e8f8ff"/><stop offset=".45" stop-color="#6f9bb2"/><stop offset=".7" stop-color="#163954"/><stop offset="1" stop-color="#739db3"/></linearGradient>
+ <linearGradient id="navy" x1="0" y1="0" x2=".9" y2="1"><stop stop-color="#168bce"/><stop offset=".45" stop-color="#075b9c"/><stop offset="1" stop-color="#032e5f"/></linearGradient>
+ <radialGradient id="glass"><stop stop-color="#276f9a"/><stop offset=".6" stop-color="#0c3656"/><stop offset="1" stop-color="#071c35"/></radialGradient>
+ <filter id="shadow" x="-.3" y="-.3" width="1.6" height="1.7"><feGaussianBlur stdDeviation="10"/></filter>
+</defs>
+<ellipse cx="300" cy="394" rx="228" ry="36" fill="#041525" opacity=".3" filter="url(#shadow)"/>
+<!-- Asas principais longas em perspectiva -->
+<path d="M280 147 40 279 15 315 35 324 278 252 322 252 565 324 585 315 560 279 320 147Z" fill="url(#wing)" stroke="#49768d" stroke-width="5"/>
+<path d="M272 170 39 300 33 311 278 228M328 170 561 300 567 311 322 228" fill="none" stroke="#ffffff" stroke-width="5" opacity=".77"/>
+<path d="M34 287 22 268 42 250 63 281M566 287 578 268 558 250 537 281" fill="url(#navy)" stroke="#9fdffa" stroke-width="3"/>
+<path d="M105 289 270 235M495 289 330 235" stroke="#1f6396" stroke-width="9" opacity=".75"/>
+<!-- Motores simétricos com tomadas de ar -->
+<g><path d="M171 224 Q161 212 150 225 L143 279 Q151 314 171 317 Q187 307 188 280 L183 230Q177 219 171 224" fill="url(#engine)" stroke="#e5f7ff" stroke-width="3"/><ellipse cx="165" cy="248" rx="18" ry="23" fill="#062237" stroke="#8bbed9" stroke-width="5"/><ellipse cx="165" cy="248" rx="10" ry="14" fill="#172e3d"/><path d="M165 234v27M154 248h22" stroke="#557b91" stroke-width="2"/></g>
+<g><path d="M429 224 Q439 212 450 225 L457 279 Q449 314 429 317 Q413 307 412 280 L417 230Q423 219 429 224" fill="url(#engine)" stroke="#e5f7ff" stroke-width="3"/><ellipse cx="435" cy="248" rx="18" ry="23" fill="#062237" stroke="#8bbed9" stroke-width="5"/><ellipse cx="435" cy="248" rx="10" ry="14" fill="#172e3d"/><path d="M435 234v27M424 248h22" stroke="#557b91" stroke-width="2"/></g>
+<!-- Empenagens -->
+<path d="M279 328 174 377 171 395 280 376 320 376 429 395 426 377 321 328Z" fill="url(#wing)" stroke="#4e748e" stroke-width="4"/>
+<path d="M298 351 275 420 325 420 302 351Z" fill="url(#navy)" stroke="#6ea0c1" stroke-width="3"/>
+<!-- Fuselagem principal -->
+<path d="M300 28 C320 43 331 82 333 126 L341 316 Q338 388 300 412 Q262 388 259 316 L267 126 C269 82 280 43 300 28Z" fill="url(#metal)" stroke="#517c97" stroke-width="5"/>
+<path d="M289 61 C278 107 277 162 274 299 Q275 365 300 398" fill="none" stroke="#ffffff" stroke-width="7" opacity=".85"/>
+<path d="M318 72 C328 133 325 249 328 317 Q324 371 300 396" fill="none" stroke="#4f849f" stroke-width="4" opacity=".65"/>
+<path d="M291 82 Q300 66 309 82 L319 158 Q301 169 281 158Z" fill="url(#glass)" stroke="#8ac9e7" stroke-width="3"/>
+<path d="M300 78V162 M288 109h24" stroke="#60b2d7" stroke-width="2" opacity=".85"/>
+<path d="M263 241 Q299 249 337 241 L335 253 Q299 260 265 253Z" fill="url(#navy)"/>
+<path d="M270 297 Q300 303 330 297 L327 307 Q300 314 273 307Z" fill="#0b71a9"/>
+<path d="M280 352 Q300 362 320 352" fill="none" stroke="#2d7399" stroke-width="6"/>
+<!-- Janelas laterais -->
+<g fill="#124566" opacity=".89"><ellipse cx="275" cy="183" rx="3" ry="6"/><ellipse cx="273" cy="200" rx="3" ry="6"/><ellipse cx="271" cy="217" rx="3" ry="6"/><ellipse cx="325" cy="183" rx="3" ry="6"/><ellipse cx="327" cy="200" rx="3" ry="6"/><ellipse cx="329" cy="217" rx="3" ry="6"/><ellipse cx="271" cy="273" rx="3" ry="6"/><ellipse cx="329" cy="273" rx="3" ry="6"/></g>
+<path d="M262 161 273 161M327 161 338 161" stroke="#dff9ff" stroke-width="3"/>
+<circle cx="46" cy="309" r="5" fill="#ff5858"/><circle cx="554" cy="309" r="5" fill="#62ffb3"/>
+<path d="M298 34l-7 31 16 0Z" fill="#ffffff" opacity=".84"/>
+</svg>

@@ -1,0 +1,26 @@
+CTA MISSION AIRPLANE — REPARO V3.6 (GITHUB PAGES + RENDER)
+
+Diagnóstico: na branch portfoliolimavirtual do repositório onsitelimavirtual/CTA-Mission-Airplane havia nove arquivos. Os 16 arquivos deste ZIP estavam ausentes, incluindo flight-core.js, necessário para montar as seis missões.
+
+NÃO EXCLUA os nove arquivos que já estão no GitHub.
+
+PROCEDIMENTO (CELULAR OU PC):
+1. Extraia este ZIP.
+2. Abra https://github.com/onsitelimavirtual/CTA-Mission-Airplane
+3. Confirme a branch portfoliolimavirtual.
+4. Clique em Add file > Upload files e escolha TODOS os 16 arquivos extraídos.
+5. Confirme que flight-core.js, aviao-cta-pro.svg, os 12 arquivos de destinos e 2 artes estão ao lado de index.html (NA RAIZ). Não coloque dentro de pasta assets.
+6. Clique em Commit changes.
+7. Em GitHub > Settings > Pages, confirme Deploy from a branch, branch portfoliolimavirtual, pasta /(root).
+8. Aguarde a publicação e recarregue o site, de preferência usando uma guia anônima para evitar cache.
+9. Para o multiplayer no Render, abra o serviço > Manual Deploy > Deploy latest commit (o serviço criado a partir de um URL público não tem auto-deploy).
+
+VERIFICAÇÃO: tente abrir os links dos arquivos no seu GitHub Pages, substituindo SEU_ENDERECO pelo endereço real do site. Uma imagem em branco/404 significa que o recurso ainda não foi publicado. Exemplo de caminhos: /flight-core.js, /logo.png, /rio.webp, /cenario-rio.webp.
+
+Validação local em 11/10/2026:
+- 17/17 testes automatizados de lógica e servidor aprovados.
+- Reproduzido em navegador: sem flight-core.js, zero missões e erro de JavaScript; completo, seis missões e zero erros JS no teste.
+- 23/23 respostas HTTP do servidor, incluindo imagens e /api/health, responderam com status 200.
+Limite: o domínio real publicado não pôde ser aberto a partir do ambiente de testes; é necessário conferir a publicação após o commit.
+
+Copyright © 2026 Nailson Rodrigues de Lima.

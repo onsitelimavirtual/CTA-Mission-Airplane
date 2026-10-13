@@ -7,7 +7,7 @@ const HOST=process.env.HOST||'0.0.0.0';
 const ROOT=__dirname;
 const MAX_PLAYERS=5,MAX_BODY=2048,TTL=40_000;
 const rooms=new Map();
-const allowed={'/':'index.html','/index.html':'index.html','/style.css':'style.css','/flight-core.js':'flight-core.js','/game.js':'game.js','/atc-core.js':'atc-core.js','/nav-core.js':'nav-core.js','/math-core.js':'math-core.js','/logo.png':'logo.png','/aviao-cta-pro.svg':'aviao-cta-pro.svg'};
+const allowed={'/':'index.html','/index.html':'index.html','/style.css':'style.css','/flight-core.js':'flight-core.js','/game.js':'game.js','/atc-core.js':'atc-core.js','/nav-core.js':'nav-core.js','/math-core.js':'math-core.js','/flight-ops.js':'flight-ops.js','/logo.png':'logo.png','/aviao-cta-pro.svg':'aviao-cta-pro.svg'};
 for(const m of Core.missions){allowed['/'+m.id+'.webp']=''+m.id+'.webp';allowed['/cenario-'+m.id+'.webp']='cenario-'+m.id+'.webp'}for(const m of Core.missions){allowed['/explorar-'+m.id+'.webp']='explorar-'+m.id+'.webp';allowed['/explorar-'+m.id+'-detalhe.webp']='explorar-'+m.id+'-detalhe.webp';allowed['/explorar-'+m.id+'-panorama.webp']='explorar-'+m.id+'-panorama.webp';allowed['/explorar-'+m.id+'-aproximacao.webp']='explorar-'+m.id+'-aproximacao.webp'}allowed['/arte-conceito-cta.webp']='arte-conceito-cta.webp';allowed['/arte-panoramica-rio.webp']='arte-panoramica-rio.webp';
 const mimes={'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'text/javascript; charset=utf-8','.png':'image/png','.svg':'image/svg+xml','.webp':'image/webp'};
 function send(res,status,data){if(res.writableEnded)return;res.writeHead(status,{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store'});res.end(JSON.stringify(data));}
@@ -75,6 +75,7 @@ const server=http.createServer(async(req,res)=>{
    if(url.pathname==='/api/finish'){
      if(p.race.result)return send(res,200,{ok:true,result:p.race.result,standings:standings(room)});
      if(p.race.progress<3||!p.race.startedAt)return send(res,409,{error:'Os três marcos da rota ainda não foram verificados pelo servidor'});
+     if(!p.state||p.state.alt>15||p.state.speed>60)return send(res,409,{error:'Conclua o pouso antes de registrar o tempo.'});
      const declared=Number(data.incidents);if(!Number.isInteger(declared)||declared<0||declared>50)return send(res,422,{error:'Contagem de incidentes inválida'});
      const elapsed=Math.round((Date.now()-p.race.startedAt)/10)/100;
      if(elapsed<Core.MIN_FLIGHT_SECONDS)return send(res,422,{error:'A missão exige pelo menos 04:00 de voo para validar a chegada.'});

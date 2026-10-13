@@ -11,3 +11,6 @@
 **Verificações pendentes:** clearance de marca “CTA Mission Airplane” e exame documental de titularidade dos materiais e eventuais direitos de terceiros. Esta nota técnica não é autorização legal definitiva para comercializar.
 
 Fontes principais: https://operations.osmfoundation.org/policies/tiles/ ; https://www.openstreetmap.org/copyright ; https://cloudless.eox.at/license-non-commercial
+
+## Adição V4.2 — São Luís
+Quatro panoramas de São Luís foram produzidos por geração de imagens para esta versão e convertidos em WebP (`explorar-saoluis*.webp`). São representações artísticas inspiradas no Centro Histórico, Palácio dos Leões e orla, **não fotografias documentais reais**. Fotos e imagens de terceiros usadas em futuras versões exigirão documentação específica das licenças. A referência a aeroportos é textual e não implica vínculo ou endosso dos operadores.

@@ -271,3 +271,19 @@ body{background:#061325}
 }
 @media(max-width:360px){.mobile-flight-tab{font-size:9px}.mobile-flight-brief strong{font-size:11px}}
 @media(prefers-reduced-motion:reduce){.mobile-flight-tab{transition:none!important}}
+
+/* V4.2 — faixa aeroportos, fases e avarias */
+.flight-ops-bar{position:absolute;z-index:17;top:170px;left:50%;transform:translateX(-50%);display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:center;padding:7px 10px;border:1px solid #77bdda8a;border-radius:13px;background:#071b30e9;box-shadow:0 8px 18px #0007;color:#e7fbff;font-size:11px;max-width:min(94%,850px)}
+.flight-ops-airport{font-weight:700}.flight-ops-bar strong{color:#ffd78c}.flight-ops-bar [data-danger="true"]{color:#ff8991;font-weight:800}
+.flight-emergency,.flight-tour-btn{background:#12395b;color:#ecfaff;border:1px solid #72bee4;border-radius:9px;padding:7px 10px;font-weight:800;cursor:pointer}
+.flight-emergency:not([hidden]){background:#b33440;color:#fff;border-color:#ffb9a9;animation:emergencyglow 1.3s ease-in-out infinite alternate}
+.flight-ops-bar [hidden]{display:none!important}@keyframes emergencyglow{from{box-shadow:0 0 1px #fff5}to{box-shadow:0 0 14px #ff2c43c0}}
+.tourist-popup{display:grid;gap:12px;margin:0 auto;max-width:840px}.tourist-popup h3{font-size:clamp(18px,4.5vw,25px);line-height:1.2;margin:2px 0}.tourist-popup img{display:block;width:100%;height:min(48vh,460px);min-height:215px;object-fit:cover;border:2px solid #5fb2d9;border-radius:15px;background:#12314f;box-shadow:0 10px 25px #0007}.tourist-popup p{color:#d7e8f9;line-height:1.5;margin:0}
+@media(max-width:680px){body.flight-active .flight-ops-bar{z-index:17;top:211px;left:8px;right:8px;transform:none;width:calc(100% - 16px);max-width:none;font-size:10px;padding:5px 6px;gap:4px}.flight-ops-airport{max-width:65%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.flight-ops-bar button{font-size:10px;padding:5px 8px}body.flight-active .mobile-flight-bar{z-index:15}body.flight-active .flight-center{top:292px!important}.tourist-popup img{min-height:230px;height:37vh}}
+
+/* V4.2 refinamento: instrumentos prioritários com menos ocupação */
+@media (min-width:681px){.flight-ops-bar{max-width:76%;font-size:10px;min-height:38px;white-space:nowrap;flex-wrap:nowrap}.flight-ops-airport{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}}
+@media (max-width:680px){body.flight-active .flight-ops-bar{max-height:84px;overflow:visible}.flight-ops-airport{max-width:100%;font-size:9px;flex:1 1 100%;text-align:center}.flight-ops-bar strong{font-size:10px}.flight-ops-bar #flightDamage{font-size:10px}.flight-ops-bar button{font-size:9px}body.flight-active .flight-ops-bar #emergencyLanding:not([hidden]){font-size:10px}}
+
+.secondary-controls #impactDemo{background:#85383f;color:#fff;border:1px solid #cc8490;flex:none;white-space:nowrap;font-size:11px;padding:5px 9px;min-height:32px;border-radius:8px}
+@media(max-width:680px){body.flight-active .secondary-controls #impactDemo{font-size:10px;max-width:90px;min-height:33px;line-height:1.2;white-space:nowrap;padding:5px 8px}}

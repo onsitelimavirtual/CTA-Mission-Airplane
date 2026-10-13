@@ -4,7 +4,11 @@
 const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
 const norm=n=>(n%360+360)%360;
 const delta=(a,b)=>(norm(b-a+540)-180);
-const speedToWorld=(a)=>Math.max(0,Number(a.speed)||0)*(a.isAI?.057:.085);
+const speedToWorld=(a)=>{
+ const speed=Math.max(0,Number(a.speed)||0);
+ // Escala do próprio jogo, sincronizada à física de voo do jogador.
+ return a.isAI?speed*.057:3.6+Math.min(speed,260)*.0065;
+};
 function vector(a){const rad=((Number(a.heading)||0)*Math.PI)/180,v=speedToWorld(a);return{x:Math.sin(rad)*v,z:Math.cos(rad)*v};}
 function approach(own,other,horizon=14){
  const ov=vector(own),tv=vector(other),dx=other.x-own.x,dz=other.z-own.z,rvx=tv.x-ov.x,rvz=tv.z-ov.z;

@@ -158,3 +158,116 @@ body{background:#061325}
  .atc-panel[data-expanded="false"]>strong{font-size:12px;line-height:1.25;margin:5px 0 1px}
  .atc-panel[data-expanded="true"]{max-height:min(60vh,370px);overflow-y:auto}
 }
+
+/* V4.0 — navegação guiada embutida no painel de missão, sem sobrepor o radar. */
+.nav-guide{border:1px solid #5a9fbb88;background:linear-gradient(155deg,#103b57dd,#09273ef0);border-radius:11px;margin:9px 0 3px;overflow:hidden}
+.nav-summary{display:flex;gap:8px;align-items:center;padding:8px 9px}
+.nav-compass{display:grid;place-items:center;flex:0 0 35px;width:35px;height:35px;border:2px solid #83e2eb;border-radius:50%;background:#0a2f47;color:#ffde89;font-size:23px;transform:rotate(0deg);transition:transform .22s ease;box-shadow:inset 0 0 12px #70d7fa22}
+.nav-summary>div{display:flex;flex-direction:column;gap:2px;min-width:0}
+.nav-summary small{font-size:9px;font-weight:900;letter-spacing:.6px;color:#ffdf9f}
+.nav-summary strong{font-size:11px;line-height:1.3;color:#fff;overflow-wrap:anywhere}
+.nav-summary span:not(.nav-compass){font-size:10px;color:#b7e9fa}
+.nav-details{border-top:1px solid #5b839788}
+.nav-details summary{list-style:none;padding:8px 10px;font-size:11px;font-weight:750;color:#bdeaf7;cursor:pointer;user-select:none}
+.nav-details summary::-webkit-details-marker{display:none}
+.nav-details summary::after{content:' ＋';float:right;color:#f2d489}
+.nav-details[open] summary::after{content:' −'}
+.nav-metrics{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin:0 8px 8px}
+.nav-metrics span{font-size:9px;color:#cee5ef;background:#153b55;border-radius:6px;padding:6px}
+.nav-metrics b{display:block;font-size:12px;color:#fff}
+.nav-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;margin:0 8px 8px}
+.nav-steps span{padding:6px 3px;border-radius:5px;font-size:8px;text-align:center;border:1px solid #376984;color:#b6d4e3}
+.nav-steps span[data-status="done"]{border-color:#3abc94;color:#9fffc9}
+.nav-steps span[data-status="current"]{border-color:#eebd61;color:#ffe3a6;background:#54421955}
+.nav-follow{display:block;width:calc(100% - 16px);margin:0 8px 7px;min-height:34px;background:#176c88;border:1px solid #91e9fd;color:white;font-size:11px;font-weight:800}
+.nav-follow[aria-pressed="true"]{background:#226b52;border-color:#8be2ac}
+.nav-disclaimer{display:block;font-size:9px;line-height:1.35;color:#a4c3d4;padding:0 9px 8px}
+@media(max-width:620px){.nav-summary{padding:6px}.nav-compass{width:29px;height:29px;flex-basis:29px;font-size:19px}.nav-summary small{font-size:8px}.nav-summary strong{font-size:10px}.nav-summary span:not(.nav-compass){font-size:9px}.nav-details summary{font-size:10px}.mission-panel{max-height:49vh;overflow-y:auto;scrollbar-width:thin}}
+@media(prefers-reduced-motion:reduce){.nav-compass{transition:none}}
+
+/* V4.0 — quatro imagens por destino, galeria acessível com miniaturas compactas. */
+.explorer-controls{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;align-items:center;padding:9px 0 2px}
+.explorer-controls>.explorer-counter-small{grid-column:1/-1;text-align:center;font-size:12px;letter-spacing:.6px}
+.explorer-thumb{height:76px;min-width:0;max-width:none;width:100%;border-radius:10px;transition:border-color .15s,transform .15s}
+.explorer-thumb.active{border-color:#ffc965;box-shadow:0 0 0 2px #ffc96544;transform:translateY(-2px)}
+.explorer-arrow:focus-visible,.explorer-thumb:focus-visible{outline:3px solid #fff1a6;outline-offset:3px}
+@media(max-width:640px){.explorer-controls{gap:5px}.explorer-thumb{height:54px;border-radius:7px}.explorer-counter-small{font-size:11px}}
+@media(prefers-reduced-motion:reduce){.explorer-thumb{transition:none;transform:none!important}}
+
+
+/* CTA V4.1 — cockpit responsivo: vista livre e painéis sob demanda.
+   Os alertas de tráfego continuam visíveis mesmo sem abrir a Central CTA. */
+.mobile-flight-bar,.mobile-panel-backdrop{display:none}
+@media(max-width:760px){
+  html,body{overflow-x:hidden}
+  body.flight-active .mobile-flight-bar{position:absolute;z-index:19;display:flex;flex-direction:column;gap:6px;top:107px;left:8px;right:8px;pointer-events:auto}
+  .mobile-flight-brief{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 11px;border:1px solid #78d8e69a;border-radius:12px;background:linear-gradient(120deg,#05253de8,#0c3c58e0);box-shadow:0 5px 15px #00182e6b;backdrop-filter:blur(8px)}
+  .mobile-flight-brief>div{display:flex;flex-direction:column;gap:2px;min-width:0}
+  .mobile-flight-brief small{font-size:8px;font-weight:850;color:#a8dcec;letter-spacing:.8px}
+  .mobile-flight-brief strong{font-size:12px;color:#fff4cc;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  #mobileFlightTime{font-size:16px;font-weight:850;font-variant-numeric:tabular-nums;color:#effbff;flex-shrink:0}
+  .mobile-flight-tabs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px}
+  .mobile-flight-tab{min-width:0;min-height:40px;padding:6px 2px;border:1px solid #5a9fbc;border-radius:9px;color:#d7eff9;background:#071d35eb;font-size:10px;font-weight:800;white-space:nowrap;touch-action:manipulation}
+  .mobile-flight-tab.active,.mobile-flight-tab[aria-pressed="true"]{color:white;background:#177194;border-color:#b7f0ff;box-shadow:inset 0 0 0 1px #d6f8ff33}
+  #mobileAtcButton[data-alert="warning"]{background:#85500d;border-color:#ffd684;color:#fff6cf}
+  #mobileAtcButton[data-alert="critical"]{background:#9b263b;border-color:#ffb4b4;color:white}
+  .mobile-flight-tab:focus-visible{outline:3px solid #fff1aa;outline-offset:2px}
+  body.flight-active .mobile-panel-backdrop:not([hidden]){position:absolute;display:block;inset:202px 0 116px;z-index:19;background:#00121a4c;border:0;padding:0;cursor:pointer}
+  /* Esconder painéis que antes competiam pela mesma área do voo. */
+  body.flight-active .flight-area .flight-destinations,
+  body.flight-active .flight-area .weather-status,
+  body.flight-active .flight-area .race-clock,
+  body.flight-active .flight-area .raceboard,
+  body.flight-active .flight-area .radar-panel,
+  body.flight-active .flight-area .mission-panel,
+  body.flight-active .flight-area .atc-panel,
+  body.flight-active .flight-area .camera-toolbar,
+  body.flight-active .flight-area .camera-mode-label{display:none!important}
+  /* Seleção traz somente o instrumento pedido para a frente. */
+  body.flight-active .flight-area[data-mobile-panel="route"] .mission-panel,
+  body.flight-active .flight-area[data-mobile-panel="radar"] .radar-panel,
+  body.flight-active .flight-area[data-mobile-panel="atc"] .atc-panel,
+  body.flight-active .flight-area[data-mobile-panel="camera"] .camera-toolbar{display:block!important;position:absolute;z-index:22;top:207px!important;bottom:auto!important;left:10px!important;right:10px!important;transform:none!important;width:calc(100% - 20px)!important;max-width:none!important;margin:0!important;max-height:calc(100dvh - 400px);overflow-y:auto;overscroll-behavior:contain;box-shadow:0 15px 35px #0009;border-radius:14px}
+  body.flight-active .flight-area[data-mobile-panel="camera"] .camera-toolbar{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;padding:12px;background:#071e34f5}
+  body.flight-active .flight-area[data-mobile-panel="camera"] .camera-option{min-height:42px;font-size:12px!important;white-space:normal}
+  body.flight-active .flight-area[data-mobile-panel="camera"] .camera-option:last-child{grid-column:1/-1}
+  body.flight-active .flight-area[data-mobile-panel="radar"] .radar-panel{width:min(330px,calc(100% - 20px))!important;left:auto!important;right:10px!important}
+  body.flight-active .flight-area[data-mobile-panel="radar"] .radar-panel canvas{height:160px!important}
+  body.flight-active .flight-area[data-mobile-panel="route"] .mission-panel{max-height:calc(100dvh - 410px)!important}
+  body.flight-active .flight-area[data-mobile-panel="atc"] .atc-panel{padding:12px 13px!important;max-height:calc(100dvh - 400px)!important}
+  body.flight-active .flight-area[data-mobile-panel="atc"] .atc-panel #atcReason,
+  body.flight-active .flight-area[data-mobile-panel="atc"] .atc-panel .atc-stats,
+  body.flight-active .flight-area[data-mobile-panel="atc"] .atc-panel .atc-actions,
+  body.flight-active .flight-area[data-mobile-panel="atc"] .atc-panel>small{display:initial!important}
+  body.flight-active .flight-area[data-mobile-panel="atc"] .atc-panel .atc-stats{display:grid!important}
+  body.flight-active .flight-area[data-mobile-panel="atc"] .atc-panel .atc-actions{display:flex!important}
+  body.flight-active .flight-hud{top:7px;left:6px;right:6px;justify-content:center;gap:5px}
+  body.flight-active .hud-chip{min-width:0;flex:1 1 0;text-align:center;padding:6px 4px}
+  body.flight-active .hud-chip small{font-size:9px}
+  body.flight-active .hud-chip strong{font-size:17px}
+  body.flight-active #throttleHint{display:none}
+  body.flight-active .flight-center{top:190px!important;left:50%;width:94%;z-index:5;pointer-events:none}
+  body.flight-active .flight-center .alert{font-size:10px;padding:5px 9px;max-width:100%}
+  body.flight-active .traffic-alert{bottom:157px!important;left:50%!important;right:auto!important;transform:translateX(-50%)!important;width:calc(100% - 24px)!important;max-height:44px;padding:5px 9px;z-index:18}
+  body.flight-active .traffic-alert[data-level="clear"]{display:none!important}
+  body.flight-active .traffic-alert strong{font-size:10px}
+  body.flight-active .traffic-alert span{font-size:9px}
+  body.flight-active .control-dock{z-index:20;left:6px;right:6px;bottom:5px;transform:none;width:calc(100% - 12px);max-width:none;gap:5px;padding:7px 6px;border-radius:13px;display:grid;grid-template-columns:1fr 1fr 1.35fr;align-items:center;justify-items:stretch}
+  body.flight-active .control-dock .named-group{width:100%;min-width:0}
+  body.flight-active .control-dock .named-group>div{display:flex;justify-content:center;width:100%}
+  body.flight-active .touch-control{width:clamp(30px,10.5vw,46px);height:40px;min-width:0}
+  body.flight-active .touch-control.accelerate{min-width:0;font-size:11px;flex:1}
+  body.flight-active .touch-control.slow{width:34px}
+  body.flight-active .control-dock .secondary-controls{grid-column:1/-1;display:flex;flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;gap:4px;width:100%;scrollbar-width:thin;min-width:0;padding:2px 1px}
+  body.flight-active .secondary-controls .mini-btn{flex:none;min-height:33px;padding:5px 8px;font-size:10px;white-space:nowrap}
+  body.flight-active .secondary-controls .zoom-status{flex:none}
+  body.flight-active .plane-visual{top:50%;width:clamp(130px,35vw,220px)}
+  body.flight-active .toast{bottom:145px;z-index:30}
+  body.flight-active .geo-map-overlay{z-index:23}
+  body.flight-active .geo-map-overlay .map-footer{font-size:9px}
+  /* Apenas no voo: permitir que o mapa seja explorado sem controles sobrepostos. */
+  body.flight-active .flight-area[data-camera-mode="4"] .mobile-flight-bar{display:none}
+  body.flight-active .flight-area[data-camera-mode="4"] .mobile-panel-backdrop{display:none!important}
+}
+@media(max-width:360px){.mobile-flight-tab{font-size:9px}.mobile-flight-brief strong{font-size:11px}}
+@media(prefers-reduced-motion:reduce){.mobile-flight-tab{transition:none!important}}

@@ -9,7 +9,14 @@ const missions=[
  {id:'fortaleza',name:'Fortaleza — Ceará',short:'Fortaleza',icon:'☀️',theme:'fortaleza',tag:'Orla, praias e sol tropical',landmarks:['Praia de Iracema','Beira-Mar','Praia do Futuro'],lat:-3.7319,lon:-38.5267},
  {id:'brasilia',name:'Brasília — Distrito Federal',short:'Brasília',icon:'🏛️',theme:'brasilia',tag:'Congresso, Catedral e Lago Paranoá',landmarks:['Congresso Nacional','Catedral Metropolitana','Ponte JK'],lat:-15.7939,lon:-47.8828}
 ];
-const route=[{x:-49,z:-44,alt:280},{x:13,z:10,alt:310},{x:91,z:81,alt:250}];
+// Rota turística em três trechos amplos, dentro do mapa local do simulador.
+// Projetada para ~5 a 6 min em velocidade de cruzeiro, sem encerrar em segundos.
+const START={x:-205,z:-205,alt:280,heading:45,speed:138};
+const route=[{x:-185,z:200,alt:280},{x:185,z:-195,alt:310},{x:-190,z:190,alt:250}];
+const MIN_FLIGHT_SECONDS=240;
+// Escala recreativa: aceleração mantém sua utilidade sem encurtar a missão a poucos segundos.
+const worldSpeed=(indicatedKnots)=>3.6+Math.max(0,Math.min(260,Number(indicatedKnots)||0))*.0065;
+const routeLength=()=>[START,...route].reduce((sum,p,i,pts)=>i?sum+Math.hypot(p.x-pts[i-1].x,p.z-pts[i-1].z):0,0);
 const clamp=(v,min,max)=>Math.max(min,Math.min(max,v));
 const norm=a=>(a%360+360)%360;
 const dist=(a,b)=>Math.hypot(a.x-b.x,a.z-b.z);
@@ -34,9 +41,9 @@ const WEATHER=[
 ];
 const WEATHER_CYCLE=[7,9,10,10,10,9];
 function weatherAt(seconds){let t=Math.max(0,Number(seconds)||0)%WEATHER_CYCLE.reduce((a,b)=>a+b,0);for(let i=0;i<WEATHER_CYCLE.length;i++){if(t<WEATHER_CYCLE[i])return WEATHER[Math.min(i,4)];t-=WEATHER_CYCLE[i]}return WEATHER[0]}
-function rankResults(results){return results.filter(p=>p&&p.finished&&Number.isFinite(p.elapsed)&&p.elapsed>=0).sort((a,b)=>((a.incidents||0)>0)-((b.incidents||0)>0)||a.elapsed-b.elapsed)}
+function rankResults(results){return results.filter(p=>p&&p.finished&&Number.isFinite(p.elapsed)&&p.elapsed>=MIN_FLIGHT_SECONDS).sort((a,b)=>((a.incidents||0)>0)-((b.incidents||0)>0)||a.elapsed-b.elapsed)}
 function msClock(seconds){const s=Math.max(0,Math.floor(seconds||0));return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')}
-function raceEligible(result){return !!result&&!!result.finished&&result.incidents===0&&Number.isFinite(result.elapsed)&&result.elapsed>0}
+function raceEligible(result){return !!result&&!!result.finished&&result.incidents===0&&Number.isFinite(result.elapsed)&&result.elapsed>=MIN_FLIGHT_SECONDS}
 // Coordenadas de referência aproximadas, para contexto educativo; não são waypoints de navegação.
 const landmarksGeo={
  quente:[[-17.772,-48.758],[-17.780,-48.764],[-17.776,-48.753]],
@@ -48,5 +55,5 @@ const landmarksGeo={
 };
 
 function arrival(p,wp){return dist(p,wp)<=18&&Math.abs(p.alt-wp.alt)<110;}
-return {missions,route,clamp,norm,dist,bearing,turnDelta,separation,cleanName,cleanRoom,safeState,arrival,WEATHER,weatherAt,rankResults,raceEligible,msClock,landmarksGeo};
+return {missions,route,START,MIN_FLIGHT_SECONDS,worldSpeed,routeLength,clamp,norm,dist,bearing,turnDelta,separation,cleanName,cleanRoom,safeState,arrival,WEATHER,weatherAt,rankResults,raceEligible,msClock,landmarksGeo};
 });

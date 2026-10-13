@@ -1,0 +1,12 @@
+CTA Mission Airplane V4.1 — cabine móvel intuitiva / 24 imagens / 6 destinos
+
+Para GitHub e Render:
+1. Extraia o ZIP e envie os arquivos da raiz (não a pasta nem o ZIP) ao repositório.
+2. Confirme a branch portfoliolimavirtual e o servidor Node.
+3. Abra Render > serviço > Deploys > Manual Deploy > Deploy latest commit.
+4. Multiplayer só pelo endereço .onrender.com.
+
+Standalone individual: CTA_Mission_Airplane_Standalone_V4_1.html.
+No celular em voo, use as abas Voo, Rota, Radar, CTA e Câmeras.
+Fotos: 24 representações artísticas, não fotografias cartográficas reais.
+© 2026 Nailson Rodrigues de Lima.

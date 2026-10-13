@@ -28,7 +28,7 @@ const server=http.createServer(async(req,res)=>{
  const common={'X-Content-Type-Options':'nosniff','Referrer-Policy':'no-referrer','X-Frame-Options':'DENY','Permissions-Policy':'geolocation=(), microphone=(), camera=()'};
  for(const[k,v] of Object.entries(common))res.setHeader(k,v);
  if(req.method==='GET'&&allowed[url.pathname]){
-   const file=path.join(ROOT,allowed[url.pathname]);try{const stat=fs.statSync(file);res.writeHead(200,{'Content-Type':mimes[path.extname(file)],'Content-Length':stat.size,'Cache-Control':'public, max-age=300'});fs.createReadStream(file).pipe(res)}catch{send(res,404,{error:'Arquivo não encontrado'})}return;
+   const file=path.join(ROOT,allowed[url.pathname]);try{const stat=fs.statSync(file);res.writeHead(200,{'Content-Type':mimes[path.extname(file)],'Content-Length':stat.size,'Cache-Control':(url.pathname==='/'||url.pathname==='/index.html')?'no-store, max-age=0':'public, max-age=300'});fs.createReadStream(file).pipe(res)}catch{send(res,404,{error:'Arquivo não encontrado'})}return;
  }
  if(req.method==='GET'&&url.pathname==='/api/health')return send(res,200,{ok:true,service:'CTA Mission Airplane',rooms:rooms.size});
  if(req.method==='GET'&&url.pathname==='/api/stream'){
